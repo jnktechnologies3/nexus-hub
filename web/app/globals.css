@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #070818;
+  --color-ink-900: #0c0e24;
+  --color-ink-850: #111332;
+  --color-ink-800: #171a40;
+  --color-ink-700: #23275a;
+  --color-ink-600: #34397a;
+  --color-violet-glow: #8b5cf6;
+  --color-cyan-glow: #22d3ee;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html, body { background: var(--color-ink-950); color: #e6e7ff; }
+body {
+  background-image:
+    radial-gradient(1200px 600px at 85% -10%, rgba(139,92,246,0.18), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(34,211,238,0.10), transparent 60%);
+  background-attachment: fixed;
+}
+@layer components {
+.panel { @apply rounded-2xl border border-white/[0.07] bg-ink-900/70 backdrop-blur; }
+.btn { @apply inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition disabled:opacity-40; }
+.btn-primary { @apply inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition disabled:opacity-40 bg-violet-600 text-white hover:bg-violet-500; }
+.btn-ghost { @apply inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition disabled:opacity-40 border border-white/10 text-slate-200 hover:bg-white/5; }
+.input { @apply w-full rounded-lg border border-white/10 bg-ink-950/70 px-3 py-2 text-sm outline-none placeholder:text-slate-500 focus:border-violet-500; }
+}
