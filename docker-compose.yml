@@ -1,0 +1,25 @@
+services:
+  api:
+    build: ./backend
+    container_name: nexus-hub-api
+    env_file: .env
+    environment:
+      NEXUS_DATABASE_URL: sqlite:////data/nexus.db
+    volumes:
+      - nexus-data:/data
+    ports:
+      - "${API_PORT:-8100}:8100"
+    restart: unless-stopped
+  web:
+    build:
+      context: ./web
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8100}
+        NEXT_PUBLIC_API_KEY: ${NEXUS_API_KEY:-}
+    container_name: nexus-hub-web
+    depends_on: [api]
+    ports:
+      - "${WEB_PORT:-3100}:3100"
+    restart: unless-stopped
+volumes:
+  nexus-data:
